@@ -29,6 +29,7 @@ def bfs(x, y):  # 탐색 위치, 넓이
     return cnt
 
 
+# 그림의 시작점 찾기
 for i in range(n):
     for j in range(m):
         if board[i][j] == 1:  # 그림이 있는 위치
