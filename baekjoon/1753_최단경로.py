@@ -1,4 +1,6 @@
 import heapq
+import sys
+input = sys.stdin.readline
 #V, E = 5, 6  # 정점의 개수, 간선의 개수
 V, E = map(int, input().split())
 K = int(input())
