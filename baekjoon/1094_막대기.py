@@ -9,3 +9,4 @@ for i in x:
     if i == '1':
         res += 1
 print(res)
+
