@@ -8,7 +8,7 @@ for i in range(n):
 		if arr[i] > arr[j]:
 			dp[i] = max(dp[i], dp[j]+1)
 
-# print(dp)
+#  print(dp)
 # 1 2 1 3 2 4
 # 10의 길이 1, 20의 길이 2, 10의 길이 ...
 x = max(dp)
