@@ -1,23 +1,31 @@
-n = int(input()) # 계단의 개수
-S = [0]*(n+1)
-for i in range(1, n+1):
-    S[i] = int(input())
+# 1. 테이블 정의하기
+# 2. 점화식
+# 3. 초기값
 
-if n == 1:
-    print(S[1])
-elif n == 2:
-    print(S[1]+S[2])
-else:
-    dp = [[0 for col in range(3)] for row in range(n+1)]
-    dp[1][1], dp[1][2] = S[1], 0
-    dp[2][1], dp[2][2] = S[2], S[1]+S[2]
-    # 계단 오르기 규칙
-    # 1. 한 계단 또는 두 계단 오르기 가능
-    # 2. 연속 세개 계단 불가능(시작점은 포함X)
-    # 3. 마지막 계단 무조건 밟기
+# dp[i][j] = 현재부터 j개의 계단을 연속으로 밟고 i번째 계단에서 얻을 수 있는 점수 합의 최대값 + i는 무조건 밟기
+# 연속된 3 계단은 불가능
 
-    for i in range(3,n+1):
-        dp[i][1] = max(dp[i-2][1], dp[i-2][2]) + S[i]
-        dp[i][2] = dp[i-1][1] + S[i]
+# dp[k][1] = max(dp[k-2][1], dp[k-2][2]) + s[k] : 1개의 계단을 연속으로 밟고, k번째 계단까지 최대 값
+# 1개의 계단을 밟았다 = k-1 밟지 않음 = k -2 밟음
+# s[k] = k번째 계단 점수
 
-    print(max(dp[n][1], dp[n][2]))
+# dp[k][2] = dp[k-1][1] + s[k] : 2개의 연속된 계단, k번째 계단까지 최대값
+
+# dp[1][1] = s[1], dp[1][2] = 0
+# dp[2][1] = s[2], dp[2][2] = s[1] + s[2]
+
+n = int(input())
+dp = [[0 for col in range(3)] for row in range(n + 1)]
+s = [0] * (n + 1)
+
+for i in range(1, n + 1):  # 계단 값
+    s[i] = int(input())
+
+dp[1][1], dp[1][2] = s[1], 0
+dp[2][1], dp[2][2] = s[2], s[1] + s[2]
+
+for k in range(3, n + 1):
+    dp[k][1] = max(dp[k - 2][1], dp[k - 2][2]) + s[k]
+    dp[k][2] = dp[k - 1][1] + s[k]
+
+print(max(dp[n][1], dp[n][2]))
