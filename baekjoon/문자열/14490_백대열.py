@@ -12,3 +12,4 @@ def gcd(a, b):
 
 value = gcd(n, m)
 print(str(n // value)+':'+str(m // value))
+
